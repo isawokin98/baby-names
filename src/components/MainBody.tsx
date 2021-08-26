@@ -18,11 +18,17 @@ import FavouritesList from "./FavouritesList";
         setFavourites([...favourites, e.currentTarget.innerText])
     }
 
+    function handleFavouriteClick(e: any){
+        setFavourites(favourites.filter(favourite => favourite !== e.currentTarget.innerText))
+    }
+
     return <> 
 
     <SearchBar search={search} onSearchChange={handleSearchChange} />
-    <FavouritesList favourites={favourites}/>
-    <NamesList search={search}  handleClickName={handleNameClick}/>
+    <p>favourites:</p>
+    <FavouritesList favourites={favourites} handleFavouriteClick={handleFavouriteClick}/>
+    <p>names list:</p>
+    <NamesList search={search}  handleClickName={handleNameClick} favourites={favourites}/>
     </>
 }
 //click={click}
