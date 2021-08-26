@@ -3,11 +3,11 @@ import NameItem from './NameItem'
 
 interface NamesListProps {
     search: string;
-    click: string;
+    //click: string;
     handleClickName: any;
 }
-
-export default function NamesList({search, click, handleClickName}: NamesListProps):JSX.Element {
+//click
+export default function NamesList({search,  handleClickName}: NamesListProps):JSX.Element {
     
     data.sort(function(a,b){
         if(a.name < b.name) return -1
@@ -19,7 +19,8 @@ export default function NamesList({search, click, handleClickName}: NamesListPro
     
     
     return <>
-{filteredData.map(item => <NameItem key={item.id} name={item.name} sex={item.sex} click={click} handleClickName={handleClickName}/>)}
+{filteredData.map(item => <NameItem key={item.id} name={item.name} sex={item.sex} handleClickName={handleClickName}/>)}
 
     </>
 }
+//click={click} 
