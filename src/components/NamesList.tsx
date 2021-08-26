@@ -1,17 +1,25 @@
 import data from '../data.json'
 import NameItem from './NameItem'
 
-export default function NamesList():JSX.Element {
+interface NamesListProps {
+    search: string;
+    click: string;
+    handleClickName: any;
+}
+
+export default function NamesList({search, click, handleClickName}: NamesListProps):JSX.Element {
     
     data.sort(function(a,b){
         if(a.name < b.name) return -1
         if (a.name > b.name) return 1
         return 0
     })
+
+    const filteredData = data.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
     
     
     return <>
-{data.map(item => <NameItem key={item.id} name={item.name} sex={item.sex}/>)}
+{filteredData.map(item => <NameItem key={item.id} name={item.name} sex={item.sex} click={click} handleClickName={handleClickName}/>)}
 
     </>
 }
