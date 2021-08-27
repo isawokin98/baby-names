@@ -1,22 +1,25 @@
 import data from '../data.json'
+import { Name } from './MainBody'
 import NameItem from './NameItem'
 
 interface NamesListProps {
     search: string;
     //click: string;
     handleClickName: any;
-    favourites: string[];
+    favourites: Name[];
+    genderedData: Name[];
+
 }
 //click
-export default function NamesList({search,  handleClickName, favourites}: NamesListProps):JSX.Element {
+export default function NamesList({search,  handleClickName, favourites, genderedData}: NamesListProps):JSX.Element {
     
-    data.sort(function(a,b){
+    genderedData.sort(function(a: Name,b: Name){
         if(a.name < b.name) return -1
         if (a.name > b.name) return 1
         return 0
     })
 
-    const filteredData = data.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) && !favourites.includes(item.name))
+    const filteredData = genderedData.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) && !favourites.includes(item))
     
     
     return <>
