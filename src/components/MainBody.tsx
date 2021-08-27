@@ -17,13 +17,11 @@ export interface Name {
   //  const [click, updateClick] = useState('')
     const [genderedData, setGenderedData] = useState<Name[]>(data)
 
-    function handleFemaleClick(e: any){
-        setGenderedData(data.filter(element => element.sex === 'f'))
+    function handleGenderClick(e: any){
+        setGenderedData(data.filter(element => element.sex === e.target.value))
     }
-    function handleMaleClick(e: any){
-        setGenderedData(data.filter(element => element.sex === 'm'))
-    }
-    function handleAllClick(e: any){
+    
+    function handleAllClick(e:any) {
         setGenderedData(data)
     }
 
@@ -42,7 +40,7 @@ export interface Name {
 
     return <> 
 
-    <SearchBar search={search} onSearchChange={handleSearchChange} handleFemaleClick={handleFemaleClick} handleMaleClick={handleMaleClick} handleAllClick={handleAllClick}/>
+    <SearchBar search={search} onSearchChange={handleSearchChange} handleGenderClick={handleGenderClick} handleAllClick={handleAllClick} />
     <p>favourites:</p>
     <FavouritesList favourites={favourites} handleFavouriteClick={handleFavouriteClick}/>
     <p>names list:</p>
