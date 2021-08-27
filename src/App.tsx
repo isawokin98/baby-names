@@ -1,8 +1,7 @@
 import MainBody from "./components/MainBody";
 
 function App(): JSX.Element {
-  return <MainBody/>
-  
+  return <MainBody />;
 }
 
 export default App;

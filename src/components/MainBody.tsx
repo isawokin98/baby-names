@@ -1,50 +1,68 @@
 import NamesList from "./NamesList";
-import { useState } from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import FavouritesList from "./FavouritesList";
-import data from '../data.json'
+import data from "../data.json";
 
 export interface Name {
-    id: number;
-    name: string;
-    sex: string
+  id: number;
+  name: string;
+  sex: string;
 }
 
- export default function MainBody():JSX.Element {
-
-    const [search, updateSearch] = useState('')
-    const [favourites, setFavourites] = useState<Name[]>([])
+export default function MainBody(): JSX.Element {
+  const [search, updateSearch] = useState("");
+  const [favourites, setFavourites] = useState<Name[]>([]);
   //  const [click, updateClick] = useState('')
-    const [genderedData, setGenderedData] = useState<Name[]>(data)
+  const [genderedData, setGenderedData] = useState<Name[]>(data);
 
-    function handleGenderClick(e: any){
-        setGenderedData(data.filter(element => element.sex === e.target.value))
-    }
-    
-    function handleAllClick(e:any) {
-        setGenderedData(data)
-    }
+  function handleGenderClick(e: React.ChangeEvent<HTMLInputElement>) {
+    setGenderedData(data.filter((element) => element.sex === e.target.value));
+  }
 
-    function handleSearchChange(e:any){
-        updateSearch(e.target.value)
-    }
+  function handleAllClick() {
+    setGenderedData(data);
+  }
 
-    function handleNameClick(e: any){
-       // updateClick(e.currentTarget.innerText)
-        setFavourites([...favourites, ...data.filter(el => el.name === e.currentTarget.innerText)])
-    }
+  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
+    updateSearch(e.target.value);
+  }
 
-    function handleFavouriteClick(e: any){
-        setFavourites(favourites.filter(favourite => favourite.name !== e.currentTarget.innerText))
-    }
+  function handleNameClick(e: React.MouseEvent<HTMLButtonElement>) {
+    setFavourites([
+      ...favourites,
+      ...data.filter((el) => el.name === e.currentTarget.innerText),
+    ]);
+  }
 
-    return <> 
+  function handleFavouriteClick(e: React.MouseEvent<HTMLButtonElement>) {
+    setFavourites(
+      favourites.filter(
+        (favourite) => favourite.name !== e.currentTarget.innerText
+      )
+    );
+  }
 
-    <SearchBar search={search} onSearchChange={handleSearchChange} handleGenderClick={handleGenderClick} handleAllClick={handleAllClick} />
-    <p>favourites:</p>
-    <FavouritesList favourites={favourites} handleFavouriteClick={handleFavouriteClick}/>
-    <p>names list:</p>
-    <NamesList search={search}  handleClickName={handleNameClick} favourites={favourites} genderedData={genderedData}/>
+  return (
+    <>
+      <SearchBar
+        search={search}
+        onSearchChange={handleSearchChange}
+        handleGenderClick={handleGenderClick}
+        handleAllClick={handleAllClick}
+      />
+      <p>favourites:</p>
+      <FavouritesList
+        favourites={favourites}
+        handleFavouriteClick={handleFavouriteClick}
+      />
+      <p>names list:</p>
+      <NamesList
+        search={search}
+        handleClickName={handleNameClick}
+        favourites={favourites}
+        genderedData={genderedData}
+      />
     </>
+  );
 }
-//click={click}
