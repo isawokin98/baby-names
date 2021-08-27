@@ -9,8 +9,13 @@ interface SearchBarProps {
 export default function SearchBar({search, onSearchChange, handleAllClick, handleFemaleClick, handleMaleClick}: SearchBarProps):JSX.Element {
     return <>
         <input value={search} onChange={onSearchChange}></input>
-        <button onClick={handleFemaleClick}>Female</button>
-        <button onClick={handleMaleClick}>Male</button>
-        <button onClick={handleAllClick}>Any gender</button>
+        <form>
+            <input type='radio' value='f' name='gender' onChange={handleFemaleClick}></input>
+            <input type='radio' value='m' name='gender' onChange={handleMaleClick}></input>
+            <input type='radio' value='all' name='gender' onChange={handleAllClick}></input>
+
+        </form>
+        
+        
     </>
 }
